@@ -1,24 +1,24 @@
 # 目录
+- [目录](#目录)
 - [0. 序言](#0-序言)
-    - [0.1 条件检查](#01-条件检查)
-    - [0.2 本书的适用人群](#02-本书的适用人群)
-    - [0.3 本书的特色](#03-本书的特色)
-    - [0.4 本书的使用方法](#04-本书的使用方法)
+  - [0.1 条件检查](#01-条件检查)
+  - [0.2 本书的适用人群](#02-本书的适用人群)
+  - [0.3 本书的特色](#03-本书的特色)
+  - [0.4 本书的使用方法](#04-本书的使用方法)
 - [1. 编程导论](#1-编程导论)
 - [2. 常识](#2-常识)
-    - [2.1 计算机基础](#21-计算机基础)
-        - [2.1.1 计算机组成](#211-计算机组成)
-        - [2.1.2 数据格式和编码](#212-数据格式和编码)
-        - [2.1.3 计算机程序](#213-计算机程序)
-    - [2.2 编程语言基础](#22-编程语言基础)
-        - [2.2.1 编译型语言和解释型语言](#221-编译型语言和解释型语言)
-        - [2.2.2 编程语言的实现](#222-编程语言的实现)
+  - [2.1. 计算机基础](#21-计算机基础)
+    - [2.1.1 计算机组成](#211-计算机组成)
+    - [2.1.2 数据格式和编码](#212-数据格式和编码)
+    - [2.1.3 计算机程序](#213-计算机程序)
+  - [2.2 编程语言基础](#22-编程语言基础)
+    - [2.2.1 编译型语言和解释型语言](#221-编译型语言和解释型语言)
+    - [2.2.2 编程语言的实现](#222-编程语言的实现)
 - [3. 从C++开始](#3-从c开始)
-    - [3.1 万物起源「Hello World」]()
-    - [3.2 输入和输出]()
-- [4. 速通Python]()
-- [-1. 结语](#1-结语)
-    - [-1.1 编者的话](#11-编者的话)
+  - [3.1 万物起源「Hello World」](#31-万物起源hello-world)
+    - [习题](#习题)
+- [-1. 结语](#-1-结语)
+  - [-1.1 编者的话](#-11-编者的话)
 
 
 # 0. 序言
@@ -151,8 +151,70 @@ https://zhuanlan.zhihu.com/p/508557771
 > There are only two kinds of languages: the ones people complain about and the ones nobody uses.
 > ——Bjarne Stroustrup
 
+## 3.1 万物起源「Hello World」
 
+> 你说的对，但是「C++」是由Bjarne Strou-strup自主研发的一款全新开放世界冒险游戏。  
+> ——Anonymous
 
+众所周知，学一门编程语言很显然要学习他的基础。「Hello World」是其一个非常经典的例子。
+
+看下以下代码。
+
+``` C++
+// helloworld.cpp (A hello world example for dummies)
+
+#include <iostream>
+
+int main() {
+    std::cout << "Hello world" << std::endl;
+    return 0;
+}
+```
+
+_~~笔者认为`using namespace std;`是非常糟糕的practice，在示例里面不是很想用~~_
+
+显然是一段非常intuitive的一段代码，但是为了夯实基础，需要浅浅的解释一下。
+
+- `#include <iostream>`   
+是指包括 _\<iostream\>_ 头文件
+
+- `int main() {...}`   
+是程序 _entry point_，必须返回 _int_ 类型。函数 _main_ 的内容用两个花括号括起来。
+
+- `std::cout << "Hello world" << std::endl;`   
+是输出字符串 _"Hello world"_ 字符串的代码。_std_ 是命名空间。_std::cout_ 显然是指 _std_ 中的 _cout_ 函数。使用 _<<_ operator 连接字符串，可以多次使用连接多个字符串。_std::endl_ 可以**片面**认为是换行。
+
+- `return 0`   
+是指 _main_ 函数返回整数 0。（与 _entry point_ ，也就是`int main()`里面的`int`对应）
+
+显然是浅显易懂，简洁明了的一段代码。
+
+对以上代码稍作修改，可以**充分**体验到C++的魅力。例如：
+
+``` C++
+// helloworld2.cpp (An example use of std::cout)
+
+#include <iostream>
+
+int main() {
+    std::cout << "You're right, " << "\n";
+    std::cout << "but" << "the C++ programming language" << "is a new, open-world adventure game solely developed by Bjarne Strou-strup." << std::endl;
+    return 0;
+}
+
+```
+
+……也就是本课的引言。
+
+### 习题
+
+1. 写一段 _C++_ 程序，使得此程序输出以下内容。~~（经典老题）~~
+
+``` text
+I love playing
+Genshin
+Impact
+```
 
 # -1. 结语
 编程是一项需要不断学习和实践的技能。希望读者能够通过本书掌握编程的基本技能，并在未来的学习和工作中有所收获。
