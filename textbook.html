@@ -89,7 +89,24 @@
 </li>
 <li><a href="#32-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8F%98%E9%87%8F">3.2 基础数据类型和变量</a>
 <ul>
+<li><a href="#321-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">3.2.1 基础数据类型</a></li>
+<li><a href="#322-%E5%8F%98%E9%87%8F">3.2.2 变量</a></li>
+<li><a href="#323-%E6%8C%87%E9%92%88%E6%95%B0%E7%BB%84%E5%92%8C%E5%BC%95%E7%94%A8">3.2.3 指针、数组和引用</a>
+<ul>
 <li><a href="#%E4%B9%A0%E9%A2%98-32-1">习题 3.2-1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#33-%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6">3.3 程序流程控制</a>
+<ul>
+<li><a href="#331-%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84">3.3.1 顺序结构</a></li>
+<li><a href="#332-%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84">3.3.2 分支结构</a></li>
+<li><a href="#333-%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84">3.3.3 循环结构</a>
+<ul>
+<li><a href="#%E4%B9%A0%E9%A2%98-33-1">习题 3.3-1</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -311,8 +328,8 @@ comment.
 <p>特别的，C++标准库中的大部分内容都在<code>std</code>命名空间中。<br>
 如果确保一份代码中不会存在命名冲突的问题，可以使用<code>using namespace std;</code>来引入命名空间，从而在之后的代码中不需使用<code>std::</code>前缀。<s>虽然笔者不建议引入命名空间，尤其是std（你永远也不知道标准库里有什么）</s></p>
 <h3 id="314-输入和输出">3.1.4 输入和输出</h3>
-<p>传统C++采用“及其先进”的流式输入输出，具体来说，使用控制台输出流（std::cout）和输出流运算符（&lt;&lt;）来进行输出，使用控制台输入流（std::cin）和输入流运算符（&gt;&gt;）来进行输入。输入或输出运算符可以连用，即可以使用<code>std::cout &lt;&lt; var1 &lt;&lt; var2;</code>的方式依次输出两个值。类似的，可以使用<code>std::cin &gt;&gt; var1 &gt;&gt; var2;</code>的方式依次输入两个值（一般情况下，以不可见字符空格、换行符、制表符Tab等分割）显然，一条语句不能既输入又输出，所以输入和输出流运算符不能连接使用。<br>
-C++标准库中包含多种输入/输出流控制元素，例如可以通过输出<code>std::endl</code>来进行换行。</p>
+<p>传统C++采用“及其先进”的流式输入输出，具体来说，使用控制台输出流（std::cout）和输出流操作符（&lt;&lt;）来进行输出，使用控制台输入流（std::cin）和输入流操作符（&gt;&gt;）来进行输入。输入或输出操作符可以连用，即可以使用<code>std::cout &lt;&lt; var1 &lt;&lt; var2;</code>的方式依次输出两个值。类似的，可以使用<code>std::cin &gt;&gt; var1 &gt;&gt; var2;</code>的方式依次输入两个值（一般情况下，以不可见字符空格、换行符、制表符Tab等分割）显然，一条语句不能既输入又输出，所以输入和输出流操作符不能连接使用。<br>
+C++标准库中包含多种输入/输出流控制元素，例如可以通过输出<code>std::endl</code>来进行换行。可以通过<code>std::cout &lt;&lt; std::fixed &lt;&lt; std::setprecision(n) &lt;&lt; ...;</code>来控制输出浮点数的小数位数为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> ，或去除<code>std::fixed</code>来控制输出浮点数的有效位数为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 。</p>
 <h3 id="习题">习题</h3>
 <p>为了帮助读者巩固知识，从本节开始，每节末尾都会有相关习题，参考答案可以在代码仓库找到。</p>
 <h4 id="习题-31-1">习题 3.1-1</h4>
@@ -322,10 +339,11 @@ Genshin
 Impact
 </code></pre>
 <h2 id="32-基础数据类型和变量">3.2 基础数据类型和变量</h2>
+<h3 id="321-基础数据类型">3.2.1 基础数据类型</h3>
 <p>众所周知，程序最初就是用来计算的，在数学中，为了简化计算，或是重复利用已经计算的结果，我们常常会使用一些符号来表示具体数值。在编程中，我们也会定义一些变量代替具体值。编程中的变量较数学更为广泛，因为它可以表示数值，也可以表示字符、字符串，甚至是自定义的东西。在编程语言中，数据都是和类型相绑定的，一般来说，基础数据类型有以下几种：</p>
 <ul>
 <li>
-<p>整数（Integer）：与数学中的整数定义相同，因为二进制整数与十进制整数总是可以互相转换，所以不存在精度问题。在C++中，整数类型分为有符号整数（signed）和无符号整数（unsigned）两类。按照数据长度分类，可以分为16位（short）、32位（long）、64位（long long）。有符号整数可以表示的数的范围为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo separator="true">,</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex"> [-2^{n-1}, 2^{n-1}-1] </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>，无符号整数可以表示的数的范围为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex"> [0, 2^n-1] </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span>，其中n为数据长度（二进制位数）。整数类型的类型名组成为<code>(符号限定符) (长度限定符) (int)</code>，其中符号限定符默认为<code>signed</code>，长度限定符默认为<code>long</code>，所以<code>int</code>表示32为有符号整数（在一些古老的机器上，<code>int</code>也可能表示16位有符号整数）。符号限定符、长度限定符和<code>int</code>三者至少出现一个。<s>（这不废话吗，都没了还算什么类型名）</s></p>
+<p>整数（Integer）：与数学中的整数定义相同，因为二进制整数与十进制整数总是可以互相转换，所以不存在精度问题。在C++中，整数类型分为有符号整数（signed）和无符号整数（unsigned）两类。按照数据长度分类，可以分为16位（short）、32位（long）、64位（long long）。有符号整数可以表示的数的范围为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo separator="true">,</mo><msup><mn>2</mn><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-2^{n-1}, 2^{n-1}-1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span> ，无符号整数可以表示的数的范围为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0, 2^n-1]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span></span></span></span> ，其中n为数据长度（二进制位数）。整数类型的类型名组成为<code>(符号限定符) (长度限定符) (int)</code>，其中符号限定符默认为<code>signed</code>，长度限定符默认为<code>long</code>，所以<code>int</code>表示32为有符号整数（在一些古老的机器上，<code>int</code>也可能表示16位有符号整数）。符号限定符、长度限定符和<code>int</code>三者至少出现一个。<s>（这不废话吗，都没了还算什么类型名）</s></p>
 </li>
 <li>
 <p>浮点数（Float）：即小数，由于二进制小数与十进制小数不一定能恰好互相转换，所以存在浮点误差。单精度浮点（float）和双精度浮点（double）分别能表示7位和15位十进制有效数字。笔者测试得到下表。（测试代码见代码仓库）</p>
@@ -367,16 +385,55 @@ Impact
 <p>布尔值（Boolean）：仅能表示真（true）、假（false）两个值，但仍占用1个字节，因为计算机中最小的单位为字节。</p>
 </li>
 <li>
-<p>指针（Pointer）：表示一个内存地址，因此其大小与去除指针后的类型大小无关，仅与程序位数有关，如32位程序的指针大小为4字节，64位程序的指针大小为8字节。</p>
+<p>指针（Pointer）：表示一个内存地址，因此其大小与去除指针后的类型大小无关，仅与程序位数有关，如32位程序的指针大小为4字节，64位程序的指针大小为8字节。一级指针的类型名组成为<code>原类型*</code>，但定义多个变量时应在每个变量名前加<code>*</code>，形如<code>int *a, *b;</code>。指针可以嵌套，即多级指针，形如<code>int**</code>。</p>
 </li>
 </ul>
 <p>C++的类型系统中包含非常多的基础类型，这里只介绍了常用的一部分，更多信息可参考https://zh.cppreference.com/w/cpp/language/types</p>
-<p>作为一门较为底层的语言，C++是静态类型的语言，即一个变量一旦定义好了，就只能表示这一个类型的值。同时它是可变的（mutable），除非在类型名前加上类型修饰符<code>const</code>使其成为常量。定义变量的语法为<code>(类型修饰符) 类型名 变量名;</code>，如<code>int x;</code>。之后可以用赋值运算符<code>=</code>对变量进行赋值操作：<code>x = 100;</code>。也可以在定义时同时进行赋值，如<code>int x = 100;</code>，还可以写成<code>int x{100};</code>，这两种的区别会在面向对象相关章节提到。还可以在一条语句中定义两个变量，如<code>int a = 1, b = 2;</code>。需要注意的是，赋值运算符是有返回值的，其返回赋值之后被赋值的变量的引用（引用将在之后的章节中介绍，这里可以暂时忽略，理解为被赋值的变量），并且它是右结合的，即从右向左运算，所以连续使用赋值运算符，如<code>a = b = c;</code>等价于<code>b = c; a = b;</code>两条语句。<br>
-C++标准对标识符（变量名、函数名、类型名等）有一定要求，可以是小写字母、大写字母、数字和下划线的组合，并且第一个字符不能是数字。<s>但现在甚至似乎可以用中文</s><br>
-直接出现在代码中的值称为字面量（literal），如<code>100</code>、<code>123.45</code>。一般编译器会自动推导字面量的类型，我们也可以通过字面量后缀手动指定类型，常见的后缀有<code>l</code>（long）、<code>ul</code>（unsigned long）、<code>ll</code>（long long）、<code>ull</code>（unsigned long long）、<code>f</code>（float）、<code>lf</code>（double）、<code>llf</code>（long double）等。特别的，可以通过字面量前缀来指定数值类型的进制，常见的有<code>0x</code>（16进制）、<code>0</code>（8进制）、<code>0b</code>（2进制，C++14及以后）。</p>
+<h3 id="322-变量">3.2.2 变量</h3>
+<p>作为一门较为底层的语言，C++是静态类型的语言，即一个变量一旦定义好了，就只能表示这一个类型的值。同时它是可变的（mutable），除非在类型名前或后（一般习惯加在前）加上类型修饰符<code>const</code>使其成为常量。定义变量的语法为<code>(类型修饰符) 类型名 变量名;</code>，如<code>int x;</code>。之后可以用赋值运算符<code>=</code>对变量进行赋值操作：<code>x = 100;</code>。也可以在定义时同时进行赋值，如<code>int x = 100;</code>，还可以写成<code>int x{100};</code>，这两种的区别会在面向对象相关章节提到。还可以在一条语句中定义两个变量，如<code>int a = 1, b = 2;</code>。需要注意的是，赋值运算符是有返回值的，其返回赋值之后被赋值的变量的引用（引用将在之后的章节中介绍，这里可以暂时忽略，理解为被赋值的变量），并且它是右结合的，即从右向左运算，所以连续使用赋值运算符，如<code>a = b = c;</code>等价于<code>b = c; a = b;</code>两条语句。<br>
+C++标准对标识符（变量名、函数名、类型名等）有一定要求，可以是小写字母、大写字母、数字和下划线的组合，并且第一个字符不能是数字。<s>但现在甚至似乎可以用中文</s></p>
+<p>直接出现在代码中的值称为字面量（literal），如<code>100</code>、<code>123.45</code>。一般编译器会自动推导字面量的类型，我们也可以通过字面量后缀手动指定类型，常见的后缀有<code>l</code>（long）、<code>ul</code>（unsigned long）、<code>ll</code>（long long）、<code>ull</code>（unsigned long long）、<code>f</code>（float）、<code>lf</code>（double）、<code>llf</code>（long double）等。特别的，可以通过字面量前缀来指定数值类型的进制，常见的有<code>0x</code>（16进制）、<code>0</code>（8进制）、<code>0b</code>（2进制，C++14及以后）。</p>
 <p>C++的数值类型变量和字面量都可以进行运算，与数学运算类似。特别的，两个整数进行除法操作时为整除，如果需要正常的除法，需要将其转换为浮点数再进行运算。除了常见的加减乘除运算符（<code>+-*/</code>），还有一个常用的整数间运算符为取余<code>%</code>。一般的，可以将赋值运算符和其他运算符结合，构成自操作运算符，例如<code>a = a + b;</code>可以改写为<code>a += b;</code>。当多个运算符同时使用时，运算符优先级规则，可以使用添加小括号的方式改变优先级。优先级顺序和结合性参考 <a href="https://zh.cppreference.com/w/cpp/language/operator_precedence">https://zh.cppreference.com/w/cpp/language/operator_precedence</a></p>
+<p>逻辑运算符是应用于两个<code>bool</code>值之间的运算符，其返回值也是<code>bool</code>值。常用的逻辑运算符如下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">逻辑运算</th>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">真值判定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∧</mo></mrow><annotation encoding="application/x-tex">\land</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5556em;"></span><span class="mord">∧</span></span></span></span></td>
+<td style="text-align:center"><code>A&amp;&amp;B</code></td>
+<td style="text-align:center">逻辑与</td>
+<td style="text-align:center">A与B同时为真</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∨</mo></mrow><annotation encoding="application/x-tex">\lor</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5556em;"></span><span class="mord">∨</span></span></span></span></td>
+<td style="text-align:center"><code>A||B</code></td>
+<td style="text-align:center">逻辑或</td>
+<td style="text-align:center">A与B至少有一个为真</td>
+</tr>
+<tr>
+<td style="text-align:center"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">¬</mi></mrow><annotation encoding="application/x-tex">\lnot</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord">¬</span></span></span></span></td>
+<td style="text-align:center"><code>!A</code></td>
+<td style="text-align:center">逻辑非</td>
+<td style="text-align:center">A为假</td>
+</tr>
+</tbody>
+</table>
+<p>与逻辑运算相对应，对于整数类型，有位运算：按位与<code>A&amp;B</code>、按位或<code>A|B</code>、按位取反<code>~A</code>、按位异或<code>A^B</code>，表示对于整数的二进制表示中每一位进行相应的操作。</p>
+<h3 id="323-指针数组和引用">3.2.3 指针、数组和引用</h3>
+<p>由于指针的重要性以及它与引用的关系之密切，我们将其单独讲解。指针为“修改数据”和“表示数据”提供了新方法，区别于简单赋值和读取，它使得我们可以从更接近底层的角度访问数据。一般的，我们可以用取地址操作符<code>&amp;</code>对一个已有的变量取地址，用解引用操作符<code>*</code>得到一个指针所指向的值。这样说其实并不准确，因为一个内存地址表示一个字节，但多数类型的大小是大于一个字节的，所以指针的值表示其指向的变量的第一个内存地址。记去除指针后的类型（下称原类型）的大小为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> ，则从这个地址开始的 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 个字节的位置实际存储这个变量的值。所以解引用实际上是将从这个地址开始的连续 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 个字节的数据解释为原类型。这样讲似乎有些抽象，我们举一个具体例子。假设我们有一个<code>int</code>类型的变量<code>v</code>，它在内存中占用1001、1002、1003、1004四个地址的空间（因为<code>int</code>类型大小为4字节），对其进行取地址操作就得到一个类型为<code>int*</code>，实际值为1001的值。指针类型的值也可以进行加减操作，但与数值类型不同的是，<code>v + 1</code>的实际值为1005，即按照原类型大小向后推 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 个字节（地址）。<br>
+还有一种特殊的指针：空类型指针<code>void*</code>，顾名思义，这个指针类型的原类型为空（<code>void</code>），或者说不带有原类型信息。它可以被转换为任何类型的指针，因此在没有模板和泛型的C语言中常常被用来传递任意类型的参数，如C标准库中的qsort函数的比较函数的参数类型为<code>void*</code>，用于对任意类型的数组进行排序。（这样做的另一个优点是不像值传参那样耗费资源，具体会在函数传参相关章节讲解）需要注意的是，<code>void</code>类型不能单独使用，它只能作为指针或者返回值（表示不返回值）使用。</p>
+<p>给指针加上一个长度信息，就成了数组，即一组在内存中<strong>连续</strong>的值。可以通过取下标操作符<code>[]</code>来获取相应下标（位置）的值的引用，需要注意的是，下标从0开始。例如，有如下定义<code>int arr[5];</code>，表示包含10个<code>int</code>型元素的数组，则<code>arr[3]</code>表示第4个元素。与普通变量类似，我们可以在定义时赋初始值<code>int arr[5] = {1, 2, 3, 4, 5};</code>。特别的，如果初始值是确定的，则可以省略中括号里的元素个数。如果指定了元素个数但设定的初始值个数小于指定的元素个数，则剩下的元素会被填充为默认值（对于数值类型来说，为0）。有一种常见的说法是数组本质上就是指针，其实不完全是，但由于C++的类型退化机制，使得数组类型在大部分情况下都被作为指针使用，甚至取下标操作符<code>arr[3]</code>都被编译器翻译为<code>*(arr + 3)</code>（读者可根据上文提到的指针加减的意义来验证这样翻译的正确性），因此我们可以写出类似<code>3[arr]</code>的逆天代码（并且是完全符合语法的）。</p>
+<p>引用（reference）是C++相较于C特有的语法，它可以被简单理解为创建一个原变量的别名（但不是复制一份出来）。引用的底层原理与指针相同，在大部分情况下可以用来代替指针，并且可以确保安全性，因为它必须引用到一个已定义的变量上，并且它引用的地址（可以理解为底层指针的实际值）不能被修改（对引用的操作就是对原变量的操作）。如果一个引用变量仅仅作为其他变量的别名来使用，它常常会被编译器优化掉，也就不占用实际空间。（但如果作为类的成员变量（在面向对象章节会介绍），它就会老老实实地用类似指针的方法来实现，因为编译器无法推导出它是否可以被优化）</p>
+<p>对于指针类型，我们可以在其类型名的<code>*</code>之后加<code>const</code>修饰符，表示这个指针变量所指向的地址是不可修改的，即在赋初始值之后不能再给它赋其他地址值，但是仍然可以通过解引用来修改它指向的地址的值（除非原类型为常量类型）。给引用类型本身加<code>const</code>修饰符是不合语法的（本身也没有意义）。</p>
 <h4 id="习题-32-1">习题 3.2-1</h4>
-<p>编写一段 <em>C++</em> 程序，使其计算并输出一个三边长为12、13、14的三角形的面积的平方。提示：使用海伦公式（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><msqrt><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mi>b</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></msqrt><mo separator="true">,</mo><mtext> </mtext><mi>p</mi><mo>=</mo><mfrac><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>c</mi></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">S=\sqrt{p(p-a)(p-b)(p-c)},\space p=\frac{a+b+c}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.24em;vertical-align:-0.305em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.935em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">b</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">c</span><span class="mclose">)</span></span></span><span style="top:-2.895em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119
+<p>编写一段 <em>C++</em> 程序，使其接受输入三个<code>int</code>范围内的正整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mtext> </mtext><mi>b</mi><mo separator="true">,</mo><mtext> </mtext><mi>c</mi></mrow><annotation encoding="application/x-tex">a,\space b,\space c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">c</span></span></span></span> ，计算并输出三边长为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo separator="true">,</mo><mtext> </mtext><mi>b</mi><mo separator="true">,</mo><mtext> </mtext><mi>c</mi></mrow><annotation encoding="application/x-tex">a,\space b,\space c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">a</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">b</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">c</span></span></span></span> 的三角形面积的平方。提示：使用海伦公式（<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><msqrt><mrow><mi>p</mi><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mi>a</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mi>b</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mi>c</mi><mo stretchy="false">)</mo></mrow></msqrt><mo separator="true">,</mo><mtext> </mtext><mi>p</mi><mo>=</mo><mfrac><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>c</mi></mrow><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">S=\sqrt{p(p-a)(p-b)(p-c)},\space p=\frac{a+b+c}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.24em;vertical-align:-0.305em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.935em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord mathnormal">p</span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">b</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">c</span><span class="mclose">)</span></span></span><span style="top:-2.895em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg xmlns="http://www.w3.org/2000/svg" width='400em' height='1.28em' viewBox='0 0 400000 1296' preserveAspectRatio='xMinYMin slice'><path d='M263,681c0.7,0,18,39.7,52,119
 c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
 c340,-704.7,510.7,-1060.3,512,-1067
 l0 -0
@@ -387,6 +444,98 @@ c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
 s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
 c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
 M1001 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.305em;"><span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">p</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2251em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight">b</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight">c</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>）。</p>
+<h2 id="33-程序流程控制">3.3 程序流程控制</h2>
+<h3 id="331-顺序结构">3.3.1 顺序结构</h3>
+<p>编程中最常用的代码结构就是顺序结构，即按照代码中的顺序从前往后一行一行地执行程序。若无特殊操作（循环、多线程、异步等），直接编写的代码即为顺序执行的。</p>
+<p>我们可以使用<code>goto-label</code>的方式来对顺序结构进行简单的修改，使用<code>label:</code>在代码中加入一个名为<code>label</code>的标签，然后使用<code>goto label;</code>来跳转至标签所在行开始向下执行。标签和<code>goto</code>没有先后顺序的要求。</p>
+<h3 id="332-分支结构">3.3.2 分支结构</h3>
+<p>在生活中，我们常常需要根据外界环境给出相应的不同的反馈，可以将其抽象为“如果……，那么……，否则……”。类似的，在C++中，我们可以通过如下方式进行条件判断：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">if</span> (condition) {
+    <span class="hljs-comment">// then...</span>
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// otherwise...</span>
+}
+</code></pre>
+<p>其中<code>condition</code>是一个返回值类型为<code>bool</code>的表达式或值（或任何可以隐式转换为<code>bool</code>类型的值），如果<code>condition</code>为<code>true</code>，则执行<code>// then...</code>这一段代码，否则（即<code>condition</code>为<code>false</code>）执行<code>// otherwise...</code>这一段代码。我们也可以去除<code>else</code>，仅保留一个<code>if</code>，或并列使用多个<code>if-else</code>，如下：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">if</span> (condition1) {
+    <span class="hljs-comment">// condition1 is true</span>
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (condition2) {
+    <span class="hljs-comment">// condition2 is true (condition1 is false)</span>
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// condition2 is false (condition1 is false)</span>
+}
+</code></pre>
+<p>对于嵌套使用<code>if-else</code>的情况，我们推荐使用逻辑与运算符<code>%%</code>和逻辑或运算符<code>||</code>将其简化为一个或少数几个<code>if-else</code>（可能需要根据优先级添加小括号），如下：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">if</span> (condition1) {
+    <span class="hljs-keyword">if</span> (condition2) {
+        <span class="hljs-comment">// both condition1 and condition2 are true</span>
+    }
+}
+<span class="hljs-comment">// is equivalent to the following</span>
+<span class="hljs-keyword">if</span> (condition1 &amp;&amp; condition2) {
+    <span class="hljs-comment">// both condition1 and condition2 are true</span>
+}
+</code></pre>
+<p>对于并列使用很多<code>if-else</code>的情况，可以考虑使用<code>switch-cases</code>，其完全形态如下：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">switch</span> (value) {
+    <span class="hljs-keyword">case</span> const_value_1:
+        <span class="hljs-comment">// value is const_value_1</span>
+    <span class="hljs-keyword">case</span> const_value_2:
+        <span class="hljs-comment">// value is const_value_2</span>
+    <span class="hljs-keyword">default</span>:
+        <span class="hljs-comment">// value is neither const_value_1 nor const_value_2</span>
+}
+</code></pre>
+<p>表示根据<code>value</code>的值跳转到相应的<code>case</code>所在行继续往下执行，如果没有匹配的<code>case</code>，则跳转至<code>default</code>（如果有，否则跳出<code>switch</code>）。需要注意的是，一个<code>case</code>并不标识一个代码块，因此如果不想让程序从一个<code>case</code>执行到另一个<code>case</code>中，可以在上一个<code>case</code>末尾添加<code>break;</code>语句来跳出<code>switch</code>。</p>
+<h3 id="333-循环结构">3.3.3 循环结构</h3>
+<p>如果要将一段代码执行多次，就可以用循环结构来简化代码（<s>虽然复制粘贴加if人肉展开也不是不行</s>）。循环常常与数组搭配使用，用来用同一套逻辑处理大量数据。最常用的循环结构实现为<code>for</code>循环：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">for</span> (init; condition; expression) {
+    <span class="hljs-comment">// statement</span>
+}
+<span class="hljs-comment">// is equivalent to the following</span>
+{
+    init;
+    label:
+    {
+        <span class="hljs-keyword">if</span> (condition) {
+            <span class="hljs-comment">// statement</span>
+            expression;
+            <span class="hljs-keyword">goto</span> label;
+        }
+    }
+}
+</code></pre>
+<p><code>goto</code>的翻译似乎有些抽象，我们进行一些讲解。一般来说，<code>for</code>循环小括号中的三个表达式依次是初始化循环变量（索引）、循环条件和修改循环变量。其执行过程为：首先执行初始化语句（第一个语句），之后判断是否满足循环条件（第二个表达式），若不满足则跳出循环，若满足则进入循环体，执行完循环体后执行修改循环变量，之后进行下一次循环（判断循环条件、执行循环体、执行修改索引为一次循环）。在循环体内，可以通过<code>condition;</code>语句来跳至下一次循环，通过<code>break;</code>语句来跳出循环。</p>
+<p><code>while</code>循环也是常用的循环结构，如下：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">while</span> (condition) {
+    <span class="hljs-comment">// statement</span>
+}
+<span class="hljs-comment">// is equivalent to the following</span>
+label:
+{
+    <span class="hljs-keyword">if</span> (condition) {
+        <span class="hljs-comment">// statement</span>
+        <span class="hljs-keyword">goto</span> label;
+    }
+}
+</code></pre>
+<p>有了理解<code>for</code>循环对应的<code>goto</code>代码后，通过<code>goto</code>代码理解<code>while</code>循环也应是trivial的。</p>
+<p>还有一类<code>do-while</code>循环，实践中并不常用，但为了完整性还是介绍一下：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">do</span> {
+    <span class="hljs-comment">// statement</span>
+} <span class="hljs-keyword">while</span> (condition);
+<span class="hljs-comment">// is equivalent to the following</span>
+label:
+{
+    <span class="hljs-comment">// statement</span>
+    <span class="hljs-keyword">if</span> (condition) {
+        <span class="hljs-keyword">goto</span> label;
+    }
+}
+</code></pre>
+<p>不难发现其与<code>while</code>循环的区别仅在于条件判断和循环体的先后。</p>
+<h4 id="习题-33-1">习题 3.3-1</h4>
+<p>编写一段 <em>C++</em> 程序，使其接受输入一个<code>int</code>范围内的正整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> ，输出1到 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> （含）中所有3的倍数，一个一行。</p>
 <h1 id="-1-结语">-1. 结语</h1>
 <p>编程是一项需要不断学习和实践的技能。希望读者能够通过本书掌握编程的基本技能，并在未来的学习和工作中有所收获。</p>
 <h2 id="-11-编者的话">-1.1 编者的话</h2>
