@@ -1,8 +1,8 @@
 #include <iostream>
 
 int main() {
-    std::cout << "I love playing" << std::endl;
-    std::cout << "Genshin" << std::endl;
-    std::cout << "Impact" << std::endl;
+    std::cout << "I love playing" << '\n';
+    std::cout << "Genshin" << '\n';
+    std::cout << "Impact" << '\n';
     return 0;
 }
