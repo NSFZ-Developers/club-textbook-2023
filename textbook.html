@@ -210,6 +210,14 @@
 <li><a href="#34-%E5%87%BD%E6%95%B0">3.4 函数</a></li>
 </ul>
 </li>
+<li><a href="#35-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%9D%E6%AD%A5">3.5 面向对象初步</a>
+<ul>
+<li><a href="#351-%E7%B1%BB">3.5.1 类</a></li>
+<li><a href="#352-%E7%BB%A7%E6%89%BF">3.5.2 继承</a></li>
+<li><a href="#353-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD">3.5.3 运算符重载</a></li>
+<li><a href="#354-%E5%A4%9A%E6%80%81">3.5.4 多态</a></li>
+</ul>
+</li>
 <li><a href="#-1-%E7%BB%93%E8%AF%AD">-1. 结语</a>
 <ul>
 <li><a href="#-11-%E7%BC%96%E8%80%85%E7%9A%84%E8%AF%9D">-1.1 编者的话</a></li>
@@ -489,9 +497,10 @@ Impact
 </ul>
 <p>C++的类型系统中包含非常多的基础类型，这里只介绍了常用的一部分，更多信息可参考<a href="https://zh.cppreference.com/w/cpp/language/types">https://zh.cppreference.com/w/cpp/language/types</a></p>
 <h3 id="322-变量">3.2.2 变量</h3>
-<p>作为一门较为底层的语言，C++是静态类型的语言，即一个变量一旦定义好了，就只能表示这一个类型的值。同时它是可变的（mutable），除非在类型名前或后（一般习惯加在前）加上类型修饰符<code>const</code>使其成为常量。定义变量的语法为<code>(类型修饰符) 类型名 变量名;</code>，如<code>int x;</code>。之后可以用赋值运算符<code>=</code>对变量进行赋值操作：<code>x = 100;</code>。也可以在定义时同时进行赋值，如<code>int x = 100;</code>，还可以写成<code>int x{100};</code>，这两种的区别会在面向对象相关章节提到。还可以在一条语句中定义两个变量，如<code>int a = 1, b = 2;</code>。需要注意的是，赋值运算符是有返回值的，其返回赋值之后被赋值的变量的引用（引用将在之后的章节中介绍，这里可以暂时忽略，理解为被赋值的变量），并且它是右结合的，即从右向左运算，所以连续使用赋值运算符，如<code>a = b = c;</code>等价于<code>b = c; a = b;</code>两条语句。<br>
-C++标准对标识符（变量名、函数名、类型名等）有一定要求，可以是小写字母、大写字母、数字和下划线的组合，并且第一个字符不能是数字。<s>但现在甚至似乎可以用中文</s></p>
-<p>直接出现在代码中的值称为字面量（literal），如<code>100</code>、<code>123.45</code>。一般编译器会自动推导字面量的类型，我们也可以通过字面量后缀手动指定类型，常见的后缀有<code>l</code>（long）、<code>ul</code>（unsigned long）、<code>ll</code>（long long）、<code>ull</code>（unsigned long long）、<code>f</code>（float）、<code>lf</code>（double）、<code>llf</code>（long double）等。特别地，可以通过字面量前缀来指定数值类型的进制，常见的有<code>0x</code>（16进制）、<code>0</code>（8进制）、<code>0b</code>（2进制，C++14及以后）。</p>
+<p>作为一门较为底层的语言，C++是静态类型的语言，即一个变量一旦定义好了，就只能表示这一个类型的值。同时它是可变的（mutable），除非在类型名前或后（一般习惯加在前）加上类型修饰符<code>const</code>使其成为常量。定义变量的语法为<code>(类型修饰符) 类型名 变量名;</code>，如<code>int x;</code>。之后可以用赋值运算符<code>=</code>对变量进行赋值操作：<code>x = 100;</code>。也可以在定义时同时进行赋值，如<code>int x = 100;</code>，还可以写成<code>int x{100};</code>，这两种的区别会在面向对象相关章节提到。还可以在一条语句中定义两个变量，如<code>int a = 1, b = 2;</code>。需要注意的是，赋值运算符是有返回值的，其返回赋值之后被赋值的变量的引用（引用将在之后的章节中介绍，这里可以暂时忽略，理解为被赋值的变量），并且它是右结合的，即从右向左运算，所以连续使用赋值运算符，如<code>a = b = c;</code>等价于<code>b = c; a = b;</code>两条语句。</p>
+<p>C++标准对标识符（变量名、函数名、类型名等）有一定要求，可以是小写字母、大写字母、数字和下划线的组合，并且第一个字符不能是数字。<s>但现在甚至似乎可以用中文</s></p>
+<p>定义在函数中的变量为局部变量，它在该函数运行完后就会被销毁；定义在<code>main</code>函数外的变量为全局变量，它会在程序运行结束后被销毁。</p>
+<p>直接出现在代码中的值称为字面量（literal），如<code>100</code>、<code>123.45</code>。一般编译器会自动推导字面量的类型，我们也可以通过字面量后缀手动指定类型，常见的后缀有<code>l</code>（long）、<code>ul</code>（unsigned long）、<code>ll</code>（long long）、<code>ull</code>（unsigned long long）、<code>f</code>（float）、<code>lf</code>（double）、<code>llf</code>（long double）等。特别地，可以通过字面量前缀来指定数值类型的进制，常见的有<code>0x</code>（16进制）、<code>0</code>（8进制）、<code>0b</code>（2进制，C++14及以后）。字符（串）字面量中有一类转义字符，即用<code>\</code>加一个字符表示一些常用的不可见字符，如<code>\n</code>表示换行符、<code>\r</code>表示回车符、<code>\t</code>表示制表符。</p>
 <p>C++的数值类型变量和字面量都可以进行运算，与数学运算类似。特别地，两个整数进行除法操作时为整除，如果需要正常的除法，需要将其转换为浮点数再进行运算。除了常见的加减乘除运算符（<code>+-*/</code>），还有一个常用的整数间运算符为取余<code>%</code>。一般的，可以将赋值运算符和其他运算符结合，构成自操作运算符，例如<code>a = a + b;</code>可以改写为<code>a += b;</code>。当多个运算符同时使用时，运算符优先级规则，可以使用添加小括号的方式改变优先级。优先级顺序和结合性参考 <a href="https://zh.cppreference.com/w/cpp/language/operator_precedence">https://zh.cppreference.com/w/cpp/language/operator_precedence</a></p>
 <p>逻辑运算符是应用于两个<code>bool</code>值之间的运算符，其返回值也是<code>bool</code>值。常用的逻辑运算符如下表：</p>
 <table>
@@ -644,11 +653,11 @@ label:
     <span class="hljs-keyword">return</span> x + y;
 }
 </code></pre>
-<p>其中<code>add</code>为函数名，其之前的<code>int</code>为返回值类型，其之后的<code>int x, int y</code>为参数列表，大括号内部为函数体。可以使用类似<code>add(1, 2)</code>的语法来调用此函数。<br>
-函数的执行流程为：遇到函数调用时，将参数（如果有）传递给参数列表中的参数，并进入函数体执行。遇到<code>return</code>时将返回值（如果有）传递回来，并回到调用处向下执行。<br>
-参数列表的语法与定义变量类似，多个参数中间用逗号分隔，但不能合并相同的类型（如<code>int x, y</code>）。与变量类似，参数也可以有默认值，但只能位于参数列表的末尾，这时调用函数时可以不传入这个参数所对应的实际参数。参数列表中定义的参数为形式参数，调用函数时传入的参数为实际参数。函数体中只能对形式参数进行操作，如果需要修改传入的实际参数，可以使用引用类型。<br>
-函数被调用时返回的值的类型由返回值类型指定。特别地，如果一个函数不需要返回任何值，则可以使用空类型<code>void</code>。通过<code>return ...;</code>在函数体内部结束函数并返回值，其中<code>...</code>可以是任何表达式。<br>
-函数体中可以调用任何函数，包括其自己。调用自己的函数为递归函数。如下面是一个利用递归函数计算阶乘的例子：</p>
+<p>其中<code>add</code>为函数名，其之前的<code>int</code>为返回值类型，其之后的<code>int x, int y</code>为参数列表，大括号内部为函数体。可以使用类似<code>add(1, 2)</code>的语法来调用此函数。</p>
+<p>函数的执行流程为：遇到函数调用时，将参数（如果有）传递给参数列表中的参数，并进入函数体执行。遇到<code>return</code>时将返回值（如果有）传递回来，并回到调用处向下执行。</p>
+<p>参数列表的语法与定义变量类似，多个参数中间用逗号分隔，但不能合并相同的类型（如<code>int x, y</code>）。事实上，参数名对定义函数来说是无关紧要的。与变量类似，参数也可以有默认值，这时这个参数为缺省参数。缺省参数只能位于参数列表的末尾（也可以有多个），这时调用函数时可以不传入这个参数所对应的实际参数（其值就是定义的默认值）。参数列表中定义的参数为形式参数，调用函数时传入的参数为实际参数。函数体中只能对形式参数进行操作，如果需要修改传入的实际参数，可以使用引用类型。</p>
+<p>函数被调用时返回的值的类型由返回值类型指定。特别地，如果一个函数不需要返回任何值，则可以使用空类型<code>void</code>。通过<code>return ...;</code>在函数体内部结束函数并返回值，其中<code>...</code>可以是任何表达式。</p>
+<p>函数体中可以调用任何函数，包括其自己。调用自己的函数为递归函数。如下面是一个利用递归函数计算阶乘的例子：</p>
 <pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">factorial</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>{
     <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) {
         <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
@@ -656,17 +665,110 @@ label:
     <span class="hljs-keyword">return</span> n * <span class="hljs-built_in">factorial</span>(n - <span class="hljs-number">1</span>);
 }
 </code></pre>
-<p>递归的进行并不是无限制的，这里需要引入调用栈（call stack）的概念。首先来了解栈：栈类似一摞积木，每块积木都是栈里的一个元素，并且栈只能从顶部进行操作，即只有拿走最上面的积木、往上加再一块积木两种操作。调用栈也是如此，简单来说，其中每个元素代表一个函数及其函数体中的局部变量。在程序运行时，操作系统负责维护这样一个栈，用于记录程序现在在哪个函数中执行。当元素数量达到一定限制时，就会溢出，俗称爆栈。（一般是达到编译器设定的限制，或是内存不足）<br>
-当递归函数的递归层数过多时，就有可能触发栈溢出，因此对于比较简单的代码，推荐使用循环等普通方法代替递归实现。（理论上所有递归代码都可以改写成只使用循环的普通方法，但过于复杂的递归代码会使人大脑升级<s>小脑萎缩</s>）</p>
-<p>另一个典型的使用引用类型作为参数的例子是交换函数：</p>
+<p>递归的进行并不是无限制的，这里需要引入调用栈（call stack）的概念。首先来了解栈：栈类似一摞积木，每块积木都是栈里的一个元素，并且栈只能从顶部进行操作，即只有拿走最上面的积木、往上加再一块积木两种操作。调用栈也是如此，简单来说，其中每个元素代表一个函数及其函数体中的局部变量。在程序运行时，操作系统负责维护这样一个栈，用于记录程序现在在哪个函数中执行。当元素数量达到一定限制时，就会溢出，俗称爆栈。（一般是达到编译器设定的限制，或是内存不足）</p>
+<p>当递归函数的递归层数过多时，就有可能触发栈溢出，因此对于比较简单的代码，推荐使用循环等普通方法代替递归实现。（理论上所有递归代码都可以改写成只使用循环的普通方法，但过于复杂的递归代码会使人大脑升级<s>小脑萎缩</s>）</p>
+<p>另一个典型的使用引用类型作为参数的例子是交换函数（顾名思义，该函数可以交换两个变量的值）：</p>
 <pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">swap</span><span class="hljs-params">(<span class="hljs-type">int</span>&amp; x, <span class="hljs-type">int</span>&amp; y)</span> </span>{
     <span class="hljs-type">int</span> t = x;
     x = y;
     y = t;
 }
 </code></pre>
-<p>由于使用了引用类型，在函数体内部对x、y变量的操作就会反映到外部的作为实际参数传入的变量中。<br>
-这里的<code>swap</code>函数只能对整数类型进行交换，如果我们想要交换浮点类型，则需要写另一个版本，方法也很简单，即将上面函数中的<code>int</code>改为<code>double</code>。得益于C++的函数重载机制，这两个函数可以共用<code>swap</code>这个名称，并且在调用时编译器会根据传入参数的类型自动判断要调用的是哪个函数。（顺便剧透一下，在模板相关章节我们会写一个能对任意类型进行交换的<code>swap</code>函数）</p>
+<p>由于使用了引用类型，在函数体内部对x、y变量的操作就会反映到外部的作为实际参数传入的变量中。引用类型的另一好处为不需要把这个变量复制一份（函数体中使用的其实就是传入的变量），因此也常被用来优化。如果不想要修改传入的变量同时不希望复制一份，可以使用常量引用（<code>const</code>的引用）。</p>
+<p>这里的<code>swap</code>函数只能对整数类型进行交换，如果我们想要交换浮点类型，则需要写另一个版本，方法也很简单，即将上面函数中的<code>int</code>改为<code>double</code>。得益于C++的函数重载机制，这两个函数可以共用<code>swap</code>这个名称，并且在调用时编译器会根据传入参数的类型自动判断要调用的是哪个函数。（顺便剧透一下，在模板相关章节我们会写一个能对任意类型进行交换的<code>swap</code>函数）</p>
+<p>有不同的参数列表（正如上文所说，参数列表的不同指的是参数类型的不同）的函数可以使用相同的函数名，这就是函数重载。函数重载带来的最大的好处在于方便了调用者，即只要是语义相同的参数类型都可以用同一个函数名进行调用，如C++标准库中的<code>std::sin</code>函数提供了<code>float</code>、<code>double</code>、<code>long double</code>三种类型的重载。</p>
+<p>值得一提的是，运算符也是可以被重载的，因为运算符本质上也是函数，但这只适用于自定义类型（将在面向对象编程相关章节详细介绍）。</p>
+<h1 id="35-面向对象初步">3.5 面向对象初步</h1>
+<p>面向对象编程（OOP，Object-Oriented Programming）是一种重要的编程范式，它使得数据和处理数据的方法紧密结合</p>
+<h2 id="351-类">3.5.1 类</h2>
+<p>类是一系列变量和函数的集合体，也就是自定义类型，可以使用如下的语法来定义一个类：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">class_name</span> {
+    <span class="hljs-comment">// ...</span>
+};
+</code></pre>
+<p>其中<code>class</code>也可以用<code>struct</code>代替，<code>// ...</code>为任意多个变量定义和函数定义，类中的变量为成员变量，类中的函数为成员函数。</p>
+<p>可以使用类型访问修饰符<code>public:</code>、<code>private:</code>和<code>protected:</code>来标记从该行开始到类定义结束范围内定义的变量和函数的可访问性，<code>public</code>表示任何地方都可以访问，<code>private</code>表示只能在该类的成员函数中访问，<code>protected</code>表示可以在该类的成员函数和派生类的成员函数中访问。</p>
+<p><code>class</code>和<code>struct</code>的唯一区别在于默认的可访问性（即不写类型访问修饰符时的可访问性）：<code>class</code>为<code>private</code>，<code>struct</code>为<code>public</code>。</p>
+<p>习惯上使<code>struct</code>只包含成员变量而不包含成员函数，且不修改它的可访问性（即保持默认的<code>public</code>）。</p>
+<p>构造函数和析构函数使类中的特殊的成员函数，构造函数名与类名相同，析构函数名为类名前加上<code>~</code>，构造函数在创建一个该类型的变量时被调用，析构函数在类的示例被销毁时被调用，构造函数和析构函数都没有返回值，并且析构函数不能有参数。</p>
+<p>可以通过成员访问运算符<code>.</code>来访问类的成员变量和成员函数，也可以使用<code>-&gt;</code>在访问时进行解引用，如<code>x-&gt;y</code>等价于<code>*(x.y)</code>。</p>
+<p><code>this</code>为类中一个特殊的指针，它指向该类的实例自己。当局部变量和类中的成员变量重名时，可以通过<code>this-&gt;</code>的方式访问成员变量，而直接使用变量名访问局部变量。</p>
+<p>创建一个该类型的变量称为类的实例化，这个变量为该类的实例，实例化时可以向构造函数传递参数，</p>
+<p>为了更好地理解，我们以如下的类为例子：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span> {
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-type">int</span> x, y;
+    <span class="hljs-built_in">Point</span>() {
+        x = <span class="hljs-number">0</span>;
+        y = <span class="hljs-number">0</span>;
+    }
+    <span class="hljs-built_in">Point</span>(<span class="hljs-type">int</span> x, <span class="hljs-type">int</span> y) {
+        <span class="hljs-keyword">this</span>-&gt;x = x;
+        <span class="hljs-keyword">this</span>-&gt;y = y;
+    }
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">set_x</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span> </span>{
+        <span class="hljs-keyword">this</span>-&gt;x = x;
+    }
+    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">get_x</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-keyword">return</span> x;
+    }
+    <span class="hljs-comment">// ...</span>
+    ~<span class="hljs-built_in">Point</span>() {
+        <span class="hljs-comment">// ...</span>
+    }
+};
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-function">Point <span class="hljs-title">point</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)</span></span>;
+    std::cout &lt;&lt; point.<span class="hljs-built_in">get_x</span>() &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>该程序的输出应为<code>1</code>。其中<code>Point point(1, 2);</code>调用了第二个构造函数，如果使用<code>Point point;</code>则会调用无参数的构造函数（即默认构造函数），也可以使用<code>Point point = Point(1, 2);</code>。</p>
+<p>由于特殊构造函数过于复杂，且牵涉到右值引用，这里暂时不介绍。</p>
+<h2 id="352-继承">3.5.2 继承</h2>
+<p>面向对象程序设计中最重要的一个概念是继承。继承允许我们依据另一个类来定义一个类，这使得创建和维护一个应用程序变得更容易，这样也达到了重用代码功能和提高执行效率的效果。当创建一个类时，不需要重新编写新的成员变量和成员函数，只需指定新建的类继承了一个已有的类即可。这个已有的类称为基类，新建的类称为派生类。继承的语法为<code>[class|struct] 派生类名: 访问修饰符 基类名</code>，其中访问修饰符为<code>public</code>、<code>protected</code>或 <code>private</code>，例如：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span> {
+};
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Derived</span> : <span class="hljs-keyword">public</span> Base {
+};
+</code></pre>
+<p>这时<code>Derived</code>类会继承<code>Base</code>类的所有成员变量和成员函数，除了<br>
+当使用不同访问修饰符的继承时，遵循以下几个规则：</p>
+<ul>
+<li>公有继承（public）：当一个类派生自<code>public</code>基类时，基类的<code>public</code>成员也是派生类的<code>public</code>成员，基类的<code>protected</code>成员也是派生类的<code>protected</code>成员，基类的<code>private</code>成员不能直接被派生类访问，但是可以通过调用基类的<code>public</code>和<code>protected</code>成员来访问。</li>
+<li>保护继承（protected）： 当一个类派生自<code>protected</code>基类时，基类的<code>public</code>和<code>protected</code>成员将成为派生类的<code>protected</code>成员。</li>
+<li>私有继承（private）：当一个类派生自<code>private</code>基类时，基类的<code>public</code>和<code>protected</code>成员将成为派生类的<code>private</code>成员。</li>
+</ul>
+<p><code>class</code>的默认继承为<code>private</code>，<code>struct</code>为<code>public</code>。</p>
+<h2 id="353-运算符重载">3.5.3 运算符重载</h2>
+<p>我们可以在类中重定义或重载大部分运算符，这样就可以对自定义类型使用运算符。重载运算符与定义函数几乎相同，只有函数名变成了<code>operator</code>加运算符。运算符的参数列表是特定的，与运算符种类和运算符重载的位置有关。例如，在类外部定义的加号<code>+</code>运算符需要两个参数，在类里定义的加号<code>+</code>运算符只要一个参数（另一个就是该类本身的实例）。</p>
+<p>例如，对于上面的<code>Point</code>类，可以这样重载加号<code>+</code>运算符：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span> {
+<span class="hljs-comment">// ...</span>
+<span class="hljs-keyword">public</span>:
+    Point <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Point&amp; rhs) {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Point</span>(x + rhs.x, y + rhs.y);
+    }
+};
+</code></pre>
+<p>或</p>
+<pre><code class="language-cpp"><span class="hljs-comment">// outside the class definition</span>
+Point <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Point&amp; lhs, <span class="hljs-type">const</span> Point&amp; rhs) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Point</span>(lhs.x + rhs.x, lhs.y + rhs.y);
+}
+</code></pre>
+<p>事实上，更常见的情况是我们会把<code>x</code>和<code>y</code>设为<code>private</code>，这时为了在<code>public</code>成员函数中访问到<code>private</code>成员变量，我们需要将其设为友元函数：</p>
+<pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span> {
+<span class="hljs-comment">// ...</span>
+<span class="hljs-keyword">public</span>:
+    <span class="hljs-keyword">friend</span> Point <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Point&amp; lhs, <span class="hljs-type">const</span> Point&amp; rhs)
+};
+Point <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const</span> Point&amp; lhs, <span class="hljs-type">const</span> Point&amp; rhs) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">Point</span>(lhs.x + rhs.x, lhs.y + rhs.y);
+}
+</code></pre>
+<h2 id="354-多态">3.5.4 多态</h2>
 <h1 id="-1-结语">-1. 结语</h1>
 <p>编程是一项需要不断学习和实践的技能。希望读者能够通过本书掌握编程的基本技能，并在未来的学习和工作中有所收获。</p>
 <h2 id="-11-编者的话">-1.1 编者的话</h2>
