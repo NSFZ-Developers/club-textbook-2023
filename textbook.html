@@ -208,14 +208,14 @@
 </ul>
 </li>
 <li><a href="#34-%E5%87%BD%E6%95%B0">3.4 函数</a></li>
-</ul>
-</li>
 <li><a href="#35-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%9D%E6%AD%A5">3.5 面向对象初步</a>
 <ul>
 <li><a href="#351-%E7%B1%BB">3.5.1 类</a></li>
 <li><a href="#352-%E7%BB%A7%E6%89%BF">3.5.2 继承</a></li>
 <li><a href="#353-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD">3.5.3 运算符重载</a></li>
 <li><a href="#354-%E5%A4%9A%E6%80%81">3.5.4 多态</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#-1-%E7%BB%93%E8%AF%AD">-1. 结语</a>
@@ -678,9 +678,9 @@ label:
 <p>这里的<code>swap</code>函数只能对整数类型进行交换，如果我们想要交换浮点类型，则需要写另一个版本，方法也很简单，即将上面函数中的<code>int</code>改为<code>double</code>。得益于C++的函数重载机制，这两个函数可以共用<code>swap</code>这个名称，并且在调用时编译器会根据传入参数的类型自动判断要调用的是哪个函数。（顺便剧透一下，在模板相关章节我们会写一个能对任意类型进行交换的<code>swap</code>函数）</p>
 <p>有不同的参数列表（正如上文所说，参数列表的不同指的是参数类型的不同）的函数可以使用相同的函数名，这就是函数重载。函数重载带来的最大的好处在于方便了调用者，即只要是语义相同的参数类型都可以用同一个函数名进行调用，如C++标准库中的<code>std::sin</code>函数提供了<code>float</code>、<code>double</code>、<code>long double</code>三种类型的重载。</p>
 <p>值得一提的是，运算符也是可以被重载的，因为运算符本质上也是函数，但这只适用于自定义类型（将在面向对象编程相关章节详细介绍）。</p>
-<h1 id="35-面向对象初步">3.5 面向对象初步</h1>
+<h2 id="35-面向对象初步">3.5 面向对象初步</h2>
 <p>面向对象编程（OOP，Object-Oriented Programming）是一种重要的编程范式，它使得数据和处理数据的方法紧密结合</p>
-<h2 id="351-类">3.5.1 类</h2>
+<h3 id="351-类">3.5.1 类</h3>
 <p>类是一系列变量和函数的集合体，也就是自定义类型，可以使用如下的语法来定义一个类：</p>
 <pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">class_name</span> {
     <span class="hljs-comment">// ...</span>
@@ -726,7 +726,7 @@ label:
 </code></pre>
 <p>该程序的输出应为<code>1</code>。其中<code>Point point(1, 2);</code>调用了第二个构造函数，如果使用<code>Point point;</code>则会调用无参数的构造函数（即默认构造函数），也可以使用<code>Point point = Point(1, 2);</code>。</p>
 <p>由于特殊构造函数过于复杂，且牵涉到右值引用，这里暂时不介绍。</p>
-<h2 id="352-继承">3.5.2 继承</h2>
+<h3 id="352-继承">3.5.2 继承</h3>
 <p>面向对象程序设计中最重要的一个概念是继承。继承允许我们依据另一个类来定义一个类，这使得创建和维护一个应用程序变得更容易，这样也达到了重用代码功能和提高执行效率的效果。当创建一个类时，不需要重新编写新的成员变量和成员函数，只需指定新建的类继承了一个已有的类即可。这个已有的类称为基类，新建的类称为派生类。继承的语法为<code>[class|struct] 派生类名: 访问修饰符 基类名</code>，其中访问修饰符为<code>public</code>、<code>protected</code>或 <code>private</code>，例如：</p>
 <pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Base</span> {
 };
@@ -741,7 +741,7 @@ label:
 <li>私有继承（private）：当一个类派生自<code>private</code>基类时，基类的<code>public</code>和<code>protected</code>成员将成为派生类的<code>private</code>成员。</li>
 </ul>
 <p><code>class</code>的默认继承为<code>private</code>，<code>struct</code>为<code>public</code>。</p>
-<h2 id="353-运算符重载">3.5.3 运算符重载</h2>
+<h3 id="353-运算符重载">3.5.3 运算符重载</h3>
 <p>我们可以在类中重定义或重载大部分运算符，这样就可以对自定义类型使用运算符。重载运算符与定义函数几乎相同，只有函数名变成了<code>operator</code>加运算符。运算符的参数列表是特定的，与运算符种类和运算符重载的位置有关。例如，在类外部定义的加号<code>+</code>运算符需要两个参数，在类里定义的加号<code>+</code>运算符只要一个参数（另一个就是该类本身的实例）。</p>
 <p>例如，对于上面的<code>Point</code>类，可以这样重载加号<code>+</code>运算符：</p>
 <pre><code class="language-cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Point</span> {
@@ -768,7 +768,7 @@ Point <span class="hljs-keyword">operator</span>+(<span class="hljs-type">const<
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">Point</span>(lhs.x + rhs.x, lhs.y + rhs.y);
 }
 </code></pre>
-<h2 id="354-多态">3.5.4 多态</h2>
+<h3 id="354-多态">3.5.4 多态</h3>
 <h1 id="-1-结语">-1. 结语</h1>
 <p>编程是一项需要不断学习和实践的技能。希望读者能够通过本书掌握编程的基本技能，并在未来的学习和工作中有所收获。</p>
 <h2 id="-11-编者的话">-1.1 编者的话</h2>
